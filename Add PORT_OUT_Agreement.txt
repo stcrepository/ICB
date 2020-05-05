@@ -1,3 +1,5 @@
+test of edit
+
 select * from RPORTOUTAGREEMENT
 
 select ID, VALIDFROM From accagreement where account_id = 'MOBILY'
