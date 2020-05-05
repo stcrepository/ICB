@@ -1,0 +1,37 @@
+**This script used to cancel IBS from IBS cockpit if there is error and could not be done through GUI:
+=======================================================================================================
+
+UPDATE IBSOBSHEAD
+SET      STATUS = 'Canceled',
+                  STATUSREASON = 'IBS_COCKPIT_CANCEL_OTHER', 
+                  MODIFIED = SYSDATE,
+                  MODIFIED_BY = 'Manually'
+WHERE ID IN(67156962, 67156654);
+
+UPDATE IBSOBSSTATEMENT
+SET      STATUS = 'Canceled',
+  STATUSREASON = 'IBS_COCKPIT_CANCEL_OTHER',
+  MODIFIED = SYSDATE,
+  MODIFIED_BY = 'Manually'
+WHERE ID IN(67156963, 67156655);
+
+UPDATE IBSOBSSTATEMENTSUMMARY
+SET      STATUS = 'Canceled',
+                                  STATUSREASON = 'IBS_COCKPIT_CANCEL_OTHER',
+                                  MODIFIED = SYSDATE,
+                                  MODIFIED_BY = 'Manually'
+WHERE STATEMENT_ID IN(67156963, 67156655); 
+                 
+UPDATE IBSRECONSUMMARY
+SET      STATUS = 'Canceled',
+                  STATUSREASON = 'IBS_COCKPIT_CANCEL_OTHER',
+                  MODIFIED = SYSDATE,
+                  MODIFIED_BY = 'Manually'
+WHERE STATEMENT_ID IN(67156963, 67156655); 
+                 
+UPDATE IBSMATCHEDITEMS
+SET      STATUS = 'Canceled',
+                                  STATUSREASON = 'IBS_COCKPIT_CANCEL_OTHER',
+                                  MODIFIED = SYSDATE,
+                                  MODIFIED_BY = 'Manually'
+WHERE STATEMENT_ID IN(67156963, 67156655);   
