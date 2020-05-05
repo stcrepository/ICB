@@ -1,0 +1,30 @@
+declare
+    v_mapping_exists number;
+begin
+
+    for r_profile in(select id from accprofile where statementdirection_code = 'FROM' and marketsegment_Code = 'RC' and REVENUETYPE_CODE = 'Expense' and id in(select profile_id From ACCPROFILEIBSTEMPLATE where fdcdocument_code = 'RCExpGen') and id != 6) loop
+                
+        begin
+            select 1
+            into v_mapping_exists 
+            From ACCPROFILE_RTRLMAPPROFILE 
+            where profile_id = r_profile.id
+            and RTRLMAPTRANSLATE_ID = 271450257652;
+        exception when no_data_found then
+            v_mapping_exists := 0;
+        end;
+        
+        if v_mapping_exists = 0 then      
+          
+            Insert into ACCPROFILE_RTRLMAPPROFILE
+               (ID, PROFILE_ID, RTRLMAPTRANSLATE_ID, STARTDATE, STATUS, CREATED, CREATEDBY)
+             Values
+               (ACCPROFILE_RTRLMAPPROFILE_SEQ.nextval, r_profile.id, 271450257652, sysdate, 
+                'Active', sysdate, 'ManualInsert');
+                
+            dbms_output.put_line('Added Mapping Rule to = ' || r_profile.id);
+        end if;
+    
+    end loop;
+
+end;

@@ -1,0 +1,9 @@
+select * from RPORTOUTAGREEMENT
+
+select ID, VALIDFROM From accagreement where account_id = 'MOBILY'
+
+Insert into RPORTOUTAGREEMENT
+   (ID, ACCOUNT_ID, AGREEMENT_ID, VALID_FROM, VALID_TO, STATUS, CREATED, CREATED_BY)
+ Values
+   (RPORTOUTAGREEMENT_seq.nextval, 'ZAIN', 'ZIN_PORT_O', TO_DATE('01/01/2000 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), null, 
+    'Active', sysdate, 'aabdelrahman');

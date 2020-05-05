@@ -1,0 +1,14 @@
+1- Get ID from production for first day of missing conversions:
+select min(id) from RCURREXRATE@ZPROD where VALIDFROM>='01-APR-2018'
+
+2- Delete all and Insert missing into test:
+
+delete from RCURREXRATE;
+commit;
+insert into RCURREXRATE select * from RCURREXRATE@ZPROD;
+commit;
+
+see counts and compare:
+select count(*) from RCURREXRATE
+union all
+select count(*) from RCURREXRATE@zprod
